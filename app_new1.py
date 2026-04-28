@@ -223,24 +223,27 @@ with col1:
 with col2:
     send = st.button("Envoyer ➤", use_container_width=True)
 
-if (send or user_input) and user_input.strip():
+if send and user_input.strip():
     question = user_input.strip()
-    st.session_state.messages.append({"role": "user", "content": question})
-    st.session_state.api_history.append({"role": "user", "content": question})
-    st.session_state.total_q += 1
+    
+    # Éviter les doublons
+    if not st.session_state.messages or st.session_state.messages[-1].get("content") != question:
+        st.session_state.messages.append({"role": "user", "content": question})
+        st.session_state.api_history.append({"role": "user", "content": question})
+        st.session_state.total_q += 1
 
-    with st.spinner("🤔 L'assistant réfléchit..."):
-        answer = ask_openrouter(question, st.session_state.api_history[:-1])
+        with st.spinner("🤔 L'assistant réfléchit..."):
+            answer = ask_openrouter(question, st.session_state.api_history[:-1])
 
-    st.session_state.messages.append({"role": "assistant", "content": answer})
-    st.session_state.api_history.append({"role": "assistant", "content": answer})
+        st.session_state.messages.append({"role": "assistant", "content": answer})
+        st.session_state.api_history.append({"role": "assistant", "content": answer})
 
-    log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chat_log.csv")
-    file_exists = os.path.exists(log_path)
-    with open(log_path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.writer(f)
-        if not file_exists:
-            writer.writerow(["Timestamp", "Question", "Reponse"])
-        writer.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), question, answer])
+        log_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "chat_log.csv")
+        file_exists = os.path.exists(log_path)
+        with open(log_path, "a", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            if not file_exists:
+                writer.writerow(["Timestamp", "Question", "Reponse"])
+            writer.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), question, answer])
 
     st.rerun()
