@@ -88,7 +88,7 @@ INSTRUCTIONS :
     messages.append({"role": "user", "content": user_question})
 
     payload = json.dumps({
-        "model": "google/gemma-3-4b-it:free",
+        "model": "qwen/qwen-2.5-7b-instruct:free",
         "max_tokens": 1000,
         "messages": messages,
         "temperature": 0.7
