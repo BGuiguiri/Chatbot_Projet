@@ -88,7 +88,7 @@ INSTRUCTIONS :
     messages.append({"role": "user", "content": user_question})
 
     payload = json.dumps({
-        "model": "mistralai/mistral-7b-instruct:free",
+        "model": "meta-llama/llama-3.2-3b-instruct:free",
         "max_tokens": 1000,
         "messages": messages,
         "temperature": 0.7
