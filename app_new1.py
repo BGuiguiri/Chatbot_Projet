@@ -88,7 +88,7 @@ INSTRUCTIONS :
     messages.append({"role": "user", "content": user_question})
 
     payload = json.dumps({
-        "model": "meta-llama/llama-3.2-3b-instruct:free",
+        "model": "google/gemma-3-4b-it:free",
         "max_tokens": 1000,
         "messages": messages,
         "temperature": 0.7
