@@ -88,7 +88,7 @@ INSTRUCTIONS :
     messages.append({"role": "user", "content": user_question})
 
     payload = json.dumps({
-        "model": "llama3-70b-8192",
+        "model": "llama-3.3-70b-versatile",
         "max_tokens": 1000,
         "messages": messages,
         "temperature": 0.7
