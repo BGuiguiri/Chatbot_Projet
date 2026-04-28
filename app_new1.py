@@ -43,7 +43,7 @@ section[data-testid="stSidebar"] * { color: rgba(255,255,255,0.85) !important; }
 @st.cache_resource
 def load_faq():
     data = []
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "faq_rh.csv")
+    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "faq_ise.csv")
     with open(path, "r", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             data.append(row)
@@ -67,17 +67,18 @@ def ask_openrouter(user_question, conversation_history):
     if not api_key:
         return "Erreur : clé API manquante. Ajoutez OPENROUTER_API_KEY dans les secrets Streamlit."
 
-    system_prompt = f"""Tu es un assistant RH expert et bienveillant pour une entreprise francaise.
-Tu dois repondre aux questions des employes de maniere claire, precise et professionnelle en francais.
+    system_prompt = f"""Tu es un assistant expert qui guide les candidats 
+sur les processus du concours ISE organisé par le CAPESA en Afrique.
+Tu dois repondre aux questions de maniere claire, precise et professionnelle en francais.
 
-Voici la base de connaissances RH de l entreprise :
+Voici la base de connaissances sur le concours ISE :
 {FAQ_CONTEXT}
 
 INSTRUCTIONS :
 1. Utilise la base de connaissances pour repondre avec precision.
 2. Reformule naturellement, ne copie pas mot pour mot.
-3. Si la question n est pas dans la FAQ mais reste un sujet RH, reponds avec tes connaissances du droit du travail francais.
-4. Sois precis, cite des chiffres et delais quand c est pertinent.
+3. Si la question n est pas dans la FAQ mais reste liee au concours ISE, reponds avec tes connaissances.
+4. Sois precis, cite des dates et delais quand c est pertinent.
 5. Propose toujours une question connexe a la fin.
 6. Reponds TOUJOURS en francais, de facon chaleureuse et professionnelle.
 7. A la fin de ta reponse indique la categorie ainsi : [Source: NomCategorie]"""
