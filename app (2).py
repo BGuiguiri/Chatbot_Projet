@@ -108,13 +108,6 @@ INSTRUCTIONS :
         with urllib.request.urlopen(req) as resp:
             result = json.loads(resp.read().decode("utf-8"))
             return result["choices"][0]["message"]["content"]
-    try:
-    with urllib.request.urlopen(req) as resp:
-        result = json.loads(resp.read().decode("utf-8"))
-        return result["choices"][0]["message"]["content"]
-    except urllib.error.HTTPError as e:
-        body = e.read().decode("utf-8")
-        return f"Erreur HTTP {e.code}: {body}"
     except Exception as e:
         return f"Erreur : {str(e)}"
 
