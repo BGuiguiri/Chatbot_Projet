@@ -19,6 +19,8 @@ html, body, .stApp {
 }
 
 #MainMenu, footer, header { visibility: hidden; }
+section[data-testid="stSidebar"] { display: none !important; }
+[data-testid="collapsedControl"] { display: none !important; }
 
 /* ── Sidebar ── */
 section[data-testid="stSidebar"] {
@@ -365,24 +367,14 @@ if "total_q" not in st.session_state:
 
 categories = sorted(set(r["categorie"] for r in faq_data))
 
-with st.sidebar:
-    st.markdown("### ISE, Assistant AI")
-    st.markdown("---")
-    st.markdown(f"""
-    <div class="stat-box"><div class="stat-n">{len(faq_data)}</div><div class="stat-l">Questions en base</div></div>
-    <div class="stat-box"><div class="stat-n">{st.session_state.total_q}</div><div class="stat-l">Questions posées</div></div>
-    """, unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("**Thèmes disponibles**")
-    for cat in categories:
-        icon = CAT_ICONS.get(cat, "📌")
-        count = sum(1 for r in faq_data if r["categorie"] == cat)
-        st.markdown(f"{icon} **{cat}** — {count} entrées")
-    st.markdown("---")
-    if st.button("Nouvelle conversation"):
-        st.session_state.messages = []
-        st.session_state.api_history = []
-        st.rerun()
+# Sidebar masquée
+st.markdown("""
+<style>
+section[data-testid="stSidebar"] { display: none !important; }
+button[kind="header"] { display: none !important; }
+.st-emotion-cache-1egp75f { display: none !important; }
+</style>
+""", unsafe_allow_html=True)
 
 # ── Header ──
 st.markdown("""
