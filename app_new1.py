@@ -88,7 +88,7 @@ INSTRUCTIONS :
     messages.append({"role": "user", "content": user_question})
 
     payload = json.dumps({
-        "model": "qwen/qwen-2.5-7b-instruct:free",
+        "model": "openrouter/auto",
         "max_tokens": 1000,
         "messages": messages,
         "temperature": 0.7
