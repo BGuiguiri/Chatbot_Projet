@@ -493,5 +493,5 @@ if send and user_input.strip():
             if not file_exists:
                 writer.writerow(["Timestamp", "Question", "Reponse"])
             writer.writerow([datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), question, answer])
-
+    st.session_state["user_input"] = ""
     st.rerun()
