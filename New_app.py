@@ -441,11 +441,7 @@ for msg in st.session_state.messages:
         content = msg["content"]
         source_tag = ""
         if "[Source:" in content:
-            parts = content.split("[Source:")
-            content = parts[0].strip()
-            cat = parts[1].replace("]", "").strip()
-            icon = CAT_ICONS.get(cat, "📌")
-            source_tag = f'<div class="source-tag"><span class="cat-badge">{icon} {cat}</span></div>'
+            content = content.split("[Source:")[0].strip()
         st.markdown(f"""
         <div class="msg-row-bot">
             <div class="avatar-bot">🎓</div>
