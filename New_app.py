@@ -400,7 +400,6 @@ st.markdown("""
 st.markdown("""
 <div class="ise-hero">
     <div class="ise-hero-title">
-        <span class="ise-hero-icon">✳</span>
         Qu'est-ce que tu veux savoir sur ISE ?
     </div>
 </div>
