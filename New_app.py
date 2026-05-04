@@ -439,7 +439,6 @@ for msg in st.session_state.messages:
         </div>""", unsafe_allow_html=True)
     else:
         content = msg["content"]
-        source_tag = ""
         if "[Source:" in content:
             content = content.split("[Source:")[0].strip()
         st.markdown(f"""
@@ -447,7 +446,6 @@ for msg in st.session_state.messages:
             <div class="avatar-bot">🎓</div>
             <div>
                 <div class="bubble-bot">{content}</div>
-                {source_tag}
             </div>
         </div>""", unsafe_allow_html=True)
 
