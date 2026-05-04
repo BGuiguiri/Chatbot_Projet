@@ -335,8 +335,7 @@ INSTRUCTIONS :
 3. Si la question n est pas dans la FAQ mais reste liee au concours ISE, reponds avec tes connaissances.
 4. Sois precis, cite des dates et delais quand c est pertinent.
 5. Propose toujours une question connexe a la fin.
-6. Reponds TOUJOURS en francais, de facon chaleureuse et professionnelle.
-7. A la fin de ta reponse indique la categorie ainsi : [Source: NomCategorie]"""
+6. Reponds TOUJOURS en francais, de facon chaleureuse et professionnelle."""
 
     messages = [{"role": "system", "content": system_prompt}]
     for msg in conversation_history[-6:]:
