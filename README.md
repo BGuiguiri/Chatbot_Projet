@@ -29,7 +29,7 @@ L'application s'appuie sur une base de connaissances structurée (`faq_ise.csv`)
 
 ##  Démo en ligne
 
- [Accéder à l'application]([https://votre-app.streamlit.app](https://chatbot-lksveuhvbfxh5jcxme7pcf.streamlit.app/))
+ [Accéder à l'application](https://chatbot-lksveuhvbfxh5jcxme7pcf.streamlit.app/)
 
 ---
 
