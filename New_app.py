@@ -9,186 +9,115 @@ st.set_page_config(page_title="ISE, Assistant AI", page_icon="🎓", layout="cen
 
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html, body, .stApp {
-    background: #f0efed !important;
+    background: #f5f0ea !important;
     font-family: 'DM Sans', sans-serif;
 }
 
 #MainMenu, footer, header { visibility: hidden; }
 section[data-testid="stSidebar"] { display: none !important; }
 [data-testid="collapsedControl"] { display: none !important; }
-button[kind="header"] { display: none !important; }
-.st-emotion-cache-1egp75f { display: none !important; }
+
+/* ── Sidebar ── */
+section[data-testid="stSidebar"] {
+    background: #1a1a18 !important;
+    border-right: none !important;
+}
+section[data-testid="stSidebar"] * {
+    color: rgba(255,255,255,0.72) !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.82rem !important;
+}
+section[data-testid="stSidebar"] h3 {
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 1.1rem !important;
+    font-weight: 500 !important;
+    color: rgba(255,255,255,0.9) !important;
+    letter-spacing: 0.03em;
+}
+
+.stat-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 0.7rem 1rem;
+    margin: 0.35rem 0;
+    text-align: center;
+}
+.stat-n {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #c8b89a !important;
+    font-family: 'Cormorant Garamond', serif !important;
+}
+.stat-l {
+    font-size: 0.67rem;
+    color: rgba(255,255,255,0.35) !important;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
 
 /* ── Main container ── */
 .block-container {
-    max-width: 740px !important;
-    padding: 0 1.5rem 1.5rem !important;
-    margin: 0 auto !important;
+    max-width: 720px !important;
+    padding: 2.5rem 1.5rem 1.5rem !important;
 }
 
-/* ── Logo zone (replaces "Obtenir Pro") ── */
-.ise-logo-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2.2rem 0 0;
-    margin-bottom: 0;
+/* ── Header ── */
+.rh-header {
+    text-align: center;
+    padding: 2.5rem 1rem 2rem;
+    margin-bottom: 0.5rem;
 }
-.ise-logo-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(255,255,255,0.72);
-    border: 1px solid rgba(0,0,0,0.09);
-    border-radius: 999px;
-    padding: 0.32rem 1rem 0.32rem 0.55rem;
-    font-size: 0.78rem;
-    font-weight: 500;
-    color: #3a3530;
-    letter-spacing: 0.02em;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-    cursor: default;
-}
-.ise-logo-icon {
-    width: 24px;
-    height: 24px;
+.rh-avatar {
+    width: 64px;
+    height: 64px;
     background: #1a1a18;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
-    flex-shrink: 0;
+    font-size: 1.6rem;
+    margin: 0 auto 1.2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
 }
-
-/* ── Hero title ── */
-.ise-hero {
-    text-align: center;
-    padding: 2.6rem 1rem 2rem;
-}
-.ise-hero-title {
-    font-family: 'Instrument Serif', serif;
-    font-size: 2.75rem;
+.rh-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
     font-weight: 400;
     color: #1a1a18;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
-.ise-hero-icon {
-    color: #c0392b;
-    font-size: 2.4rem;
-    display: inline-block;
-    animation: spin-slow 8s linear infinite;
-}
-@keyframes spin-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
-/* ── Chat input card ── */
-.chat-card-wrap {
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.1);
-    border-radius: 18px;
-    padding: 1rem 1rem 0.7rem;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.05);
-    margin-bottom: 1.6rem;
-}
-
-/* ── Input override ── */
-.stTextInput > div > div > input {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    color: #1a1a18 !important;
-    font-size: 0.95rem !important;
-    font-family: 'DM Sans', sans-serif !important;
-    font-weight: 400 !important;
-    padding: 0.2rem 0.4rem !important;
-    box-shadow: none !important;
-}
-.stTextInput > div > div > input::placeholder {
-    color: #b0a898 !important;
-    font-style: normal;
-    font-weight: 300 !important;
-}
-.stTextInput > div > div > input:focus {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-}
-.stTextInput > div > div {
-    border: none !important;
-    box-shadow: none !important;
-}
-
-/* ── Send button ── */
-.stButton > button {
-    background: #c0392b !important;
-    color: #ffffff !important;
-    border: none !important;
-    border-radius: 999px !important;
-    font-family: 'DM Sans', sans-serif !important;
-    font-size: 0.82rem !important;
-    font-weight: 500 !important;
-    letter-spacing: 0.03em !important;
-    padding: 0.52rem 1.3rem !important;
-    transition: opacity 0.2s, transform 0.15s !important;
-    box-shadow: 0 2px 10px rgba(192,57,43,0.25) !important;
-}
-.stButton > button:hover {
-    opacity: 0.88 !important;
-    transform: translateY(-1px) !important;
-}
-
-/* ── Card footer row ── */
-.card-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 0.6rem;
-    padding-top: 0.5rem;
-    border-top: 1px solid rgba(0,0,0,0.06);
-}
-.card-footer-left {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-.card-footer-add {
-    width: 28px;
-    height: 28px;
-    background: rgba(0,0,0,0.05);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    color: #7a7268;
-    cursor: pointer;
-}
-.card-model-badge {
-    font-size: 0.72rem;
-    color: #8a8070;
-    font-weight: 400;
     letter-spacing: 0.01em;
+    margin-bottom: 0.4rem;
+}
+.rh-subtitle {
+    font-size: 0.83rem;
+    color: #8a8070;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+}
+.rh-badge {
+    display: inline-block;
+    margin-top: 0.8rem;
+    background: rgba(26,26,24,0.06);
+    color: #6b6155;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 /* ── Chat area ── */
 .chat-area {
+    background: transparent;
     padding: 0.5rem 0;
-    min-height: 0;
-    margin-bottom: 0.8rem;
+    min-height: 360px;
+    margin-bottom: 1.2rem;
 }
 
 /* ── Messages ── */
@@ -206,56 +135,63 @@ button[kind="header"] { display: none !important; }
     align-items: flex-end;
     gap: 0.6rem;
 }
+
 .bubble-user {
     background: #1a1a18;
     color: #f0ebe3;
-    padding: 0.85rem 1.1rem;
-    border-radius: 18px 18px 4px 18px;
+    padding: 0.9rem 1.2rem;
+    border-radius: 20px 20px 4px 20px;
     max-width: 70%;
     font-size: 0.88rem;
     line-height: 1.6;
     font-weight: 300;
+    letter-spacing: 0.01em;
 }
+
 .bubble-bot {
     background: #ffffff;
     color: #1a1a18;
-    padding: 0.85rem 1.1rem;
-    border-radius: 18px 18px 18px 4px;
-    max-width: 72%;
+    padding: 0.9rem 1.2rem;
+    border-radius: 20px 20px 20px 4px;
+    max-width: 70%;
     font-size: 0.88rem;
     line-height: 1.6;
     font-weight: 300;
+    letter-spacing: 0.01em;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
 }
+
 .avatar-bot {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     background: #1a1a18;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 .avatar-user {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     background: #d9d0c4;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.82rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
 }
 
-/* ── Source tag ── */
 .source-tag {
     font-size: 0.67rem;
     color: #a89e90;
     margin-top: 0.3rem;
     padding-left: 0.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 .cat-badge {
     display: inline-block;
@@ -268,29 +204,72 @@ button[kind="header"] { display: none !important; }
     font-weight: 500;
 }
 
-/* ── Chips ── */
+/* ── Chips / suggestions ── */
 .chips-wrap {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.4rem;
-    margin: 1.4rem 0 0.8rem;
+    gap: 0.45rem;
+    margin: 1.2rem 0 0.6rem;
     justify-content: center;
 }
 .chip {
-    background: rgba(255,255,255,0.85);
-    border: 1px solid rgba(26,26,24,0.1);
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(26,26,24,0.12);
     color: #4a4438;
-    padding: 0.34rem 0.85rem;
-    border-radius: 999px;
-    font-size: 0.75rem;
+    padding: 0.38rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.76rem;
     font-weight: 400;
+    letter-spacing: 0.01em;
     cursor: pointer;
-    transition: all 0.18s;
+    transition: all 0.2s;
 }
 .chip:hover { background: #1a1a18; color: #f0ebe3; }
 
+/* ── Input ── */
+.stTextInput > div > div > input {
+    background: #ffffff !important;
+    border: 1px solid rgba(26,26,24,0.14) !important;
+    border-radius: 30px !important;
+    color: #1a1a18 !important;
+    font-size: 0.88rem !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-weight: 300 !important;
+    padding: 0.78rem 1.4rem !important;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
+    transition: box-shadow 0.2s, border-color 0.2s !important;
+}
+.stTextInput > div > div > input::placeholder {
+    color: #b0a898 !important;
+    font-style: italic;
+    font-weight: 300 !important;
+}
+.stTextInput > div > div > input:focus {
+    border-color: rgba(26,26,24,0.35) !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1) !important;
+    outline: none !important;
+}
+
+/* ── Send button ── */
+.stButton > button {
+    background: #1a1a18 !important;
+    color: #f0ebe3 !important;
+    border: none !important;
+    border-radius: 30px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.04em !important;
+    padding: 0.7rem 1.4rem !important;
+    transition: opacity 0.2s !important;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15) !important;
+}
+.stButton > button:hover { opacity: 0.82 !important; }
+
 /* ── Spinner ── */
 .stSpinner > div { color: #8a8070 !important; }
+
+/* ── Divider ── */
 hr { border-color: rgba(26,26,24,0.08) !important; }
 </style>
 """, unsafe_allow_html=True)
@@ -386,27 +365,28 @@ if "api_history" not in st.session_state:
 if "total_q" not in st.session_state:
     st.session_state.total_q = 0
 
-# ── Logo bar (replaces "Obtenir Pro") ──
+categories = sorted(set(r["categorie"] for r in faq_data))
+
+# Sidebar masquée
 st.markdown("""
-<div class="ise-logo-bar">
-    <div class="ise-logo-pill">
-        <div class="ise-logo-icon">🎓</div>
-        ISE · Assistant AI · CAPESA
-    </div>
+<style>
+section[data-testid="stSidebar"] { display: none !important; }
+button[kind="header"] { display: none !important; }
+.st-emotion-cache-1egp75f { display: none !important; }
+</style>
+""", unsafe_allow_html=True)
+
+# ── Header ──
+st.markdown("""
+<div class="rh-header">
+    <div class="rh-avatar">🎓</div>
+    <p class="rh-title">ISE, Assistant AI</p>
+    <p class="rh-subtitle">Votre assistant IA dédié au concours ISE — réponses expertes instantanées.</p>
+    <span class="rh-badge">⚡ ISE · Assistant AI · CAPESA</span>
 </div>
 """, unsafe_allow_html=True)
 
-# ── Hero title ──
-st.markdown("""
-<div class="ise-hero">
-    <div class="ise-hero-title">
-        <span class="ise-hero-icon">✳</span>
-        Qu'est-ce que tu veux savoir sur ISE ?
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-# ── Chat area ──
+# ── Chat ──
 st.markdown('<div class="chat-area">', unsafe_allow_html=True)
 
 if not st.session_state.messages:
@@ -459,30 +439,19 @@ for msg in st.session_state.messages:
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ── Chat input card ──
-st.markdown('<div class="chat-card-wrap">', unsafe_allow_html=True)
-
-user_input = st.text_input(
-    "", placeholder="Posez votre question sur le concours ISE…",
-    label_visibility="collapsed", key="user_input"
-)
-
-st.markdown("""
-<div class="card-footer">
-    <div class="card-footer-left">
-        <div class="card-footer-add">+</div>
-        <span class="card-model-badge">ISE · Assistant AI</span>
-    </div>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-send = st.button("Envoyer ➤", use_container_width=False)
+col1, col2 = st.columns([5, 1])
+with col1:
+    user_input = st.text_input(
+        "", placeholder="Posez votre question sur le concours ISE…",
+        label_visibility="collapsed", key="user_input"
+    )
+with col2:
+    send = st.button("Envoyer ➤", use_container_width=True)
 
 if send and user_input.strip():
     question = user_input.strip()
-
+    
+    # Éviter les doublons
     if not st.session_state.messages or st.session_state.messages[-1].get("content") != question:
         st.session_state.messages.append({"role": "user", "content": question})
         st.session_state.api_history.append({"role": "user", "content": question})
